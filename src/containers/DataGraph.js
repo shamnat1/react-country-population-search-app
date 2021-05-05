@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {useSelector} from 'react-redux';
 import {Card} from'react-bootstrap'
 import { ResponsiveContainer,BarChart, Bar, XAxis, YAxis,Tooltip,Cell } from "recharts";

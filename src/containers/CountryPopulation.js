@@ -1,4 +1,4 @@
-import React, { useRef,useEffect,useState,Fragment } from "react";
+import React, { useRef,useEffect,useState } from "react";
 import {useSelector,useDispatch} from 'react-redux'
 import { useGoogleMap, useMap } from "./MapHook";
 import DataGraph from "./DataGraph";
@@ -36,7 +36,6 @@ const CountryMap = () => {
         setSingleSelections([])
     }
     const selectCountryInputChange = (selected) =>{
-        console.log(selected)
         if(selected.length >= 3) {
             fetchPopulation(countryUrl, selected);
             setSelectedRegion('')
@@ -45,16 +44,18 @@ const CountryMap = () => {
     const selectCountry = (selected) =>{
         setSelectedRegion('')
         if(selected && selected[0] && selected[0].name) {
-            console.log(selected, selected[0].name, singleSelections)
             fetchPopulation(countryUrl, selected[0].name);
         }
     }
 
 
-    useEffect(async ()=>{
-        const countryList = await getCountryList();
-        dispatch(setCountries(countryList));
-    },[])
+    useEffect(()=>{
+        (async()=>
+            {
+                const countryList = await getCountryList();
+                dispatch(setCountries(countryList));
+            })()
+    },[dispatch])
 
 
     const googleMap = useGoogleMap(API_KEY);

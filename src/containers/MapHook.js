@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {useSelector} from "react-redux";
 import GoogleMapsApiLoader from "google-maps-api-loader";
 
@@ -8,7 +8,7 @@ const useGoogleMap = apiKey => {
         GoogleMapsApiLoader({ apiKey }).then(google => {
             setGoogleMap(google);
         });
-    }, []);
+    }, [apiKey]);
     return googleMap;
 };
 
@@ -24,7 +24,6 @@ const useMap = ({ googleMap, mapContainerRef, initialConfig }) => {
     useEffect(
         () => {
             clearMarkers()
-            console.log("country_population MAp ",country_population)
             if (!googleMap || !mapContainerRef.current) {
                 return;
             }
@@ -34,8 +33,8 @@ const useMap = ({ googleMap, mapContainerRef, initialConfig }) => {
                 initialConfig
             );
             // marker
-            country_population.map(country => {
-                if(country.latlng && country.latlng.length == 2) {
+            country_population.forEach(country => {
+                if(country.latlng && country.latlng.length === 2) {
                     const marker = new googleMap.maps.Marker({
                         position: {lat: country.latlng[0], lng: country.latlng[1]}, //initialConfig.center,
                         map: map
@@ -47,7 +46,6 @@ const useMap = ({ googleMap, mapContainerRef, initialConfig }) => {
                       
                   </div>`
                     });
-                    console.log(country.name)
                     marker.addListener("click", () => {
                         InfoWindow.open(map, marker);
                     });

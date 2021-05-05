@@ -10,6 +10,7 @@
     "bootstrap": "^4.6.0",
     "google-maps-api-loader": "^1.1.1",
     "google-maps-react": "^2.0.6",
+    "jquery": "^3.6.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-typeahead": "^5.1.4",
